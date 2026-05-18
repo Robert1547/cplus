@@ -1,0 +1,25 @@
+// BILETUL 7
+// Sa se afiseze rezultatul sumei S = 2 - 4 + 6 - ... + (-1)^(n+1) * 2n
+// Exemplu: n=3 => S = 2-4+6 = 4
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout << "Introduceti n = ";
+    cin >> n;
+
+    long long S = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        if(i % 2 == 1)
+            S += 2 * i;   // termen pozitiv
+        else
+            S -= 2 * i;   // termen negativ
+    }
+
+    cout << endl;
+    cout << "S = " << S;
+    return 0;
+}

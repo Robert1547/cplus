@@ -1,0 +1,66 @@
+// BILETUL 19
+// Se citeste o matrice patratica de dimensiune nxn.
+// a) Sa se afiseze numerele prime de pe diagonala principala.
+// b) Sa se formeze un vector cu elementele matricei
+//    parcurse in ordine pe coloane.
+
+#include <iostream>
+using namespace std;
+
+bool estePrim(int n)
+{
+    if(n < 2) return false;
+    for(int d = 2; d * d <= n; d++)
+        if(n % d == 0)
+            return false;
+    return true;
+}
+
+int main()
+{
+    int n;
+    int a[100][100];
+    cout << "Introduceti ordinul matricei n = ";
+    cin >> n;
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    cout << endl;
+    cout << "Matricea introdusa este:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+    // a) Numerele prime de pe diagonala principala
+    cout << endl;
+    cout << "Numerele prime de pe diagonala principala: ";
+    bool gasit = false;
+    for(int i = 1; i <= n; i++)
+    {
+        if(estePrim(a[i][i]))
+        {
+            cout << a[i][i] << " ";
+            gasit = true;
+        }
+    }
+    if(!gasit)
+        cout << "Nu exista numere prime pe diagonala principala.";
+
+    // b) Vector cu elementele parcurse pe coloane
+    cout << endl;
+    cout << endl;
+    cout << "Vectorul format parcurgand matricea pe coloane:" << endl;
+    for(int j = 1; j <= n; j++)
+        for(int i = 1; i <= n; i++)
+            cout << a[i][j] << " ";
+
+    return 0;
+}

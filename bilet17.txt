@@ -1,0 +1,20 @@
+// BILETUL 17
+// Sa se afiseze rezultatul sumei S = 2 + 4 + 6 + ... + 2n
+// Exemplu: n=3 => S = 12
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout << "Introduceti n = ";
+    cin >> n;
+
+    long long S = 0;
+    for(int i = 1; i <= n; i++)
+        S += 2 * i;
+
+    cout << endl;
+    cout << "S = 2 + 4 + ... + " << 2 * n << " = " << S;
+    return 0;
+}

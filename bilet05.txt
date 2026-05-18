@@ -1,0 +1,29 @@
+// BILETUL 5
+// Sa se afiseze media aritmetica a unui sir de numere citit
+// de la tastatura pana la introducerea numarului 0.
+// Exemplu: 3, 2, 2, 3, 1, 1, 0 => 2
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    double suma = 0;
+    int nr, count = 0;
+
+    cout << "Introduceti numerele (0 pentru a opri):" << endl;
+    cin >> nr;
+    while(nr != 0)
+    {
+        suma += nr;
+        count++;
+        cin >> nr;
+    }
+
+    cout << endl;
+    if(count == 0)
+        cout << "Nu s-au introdus numere.";
+    else
+        cout << "Media aritmetica este: " << suma / count;
+
+    return 0;
+}

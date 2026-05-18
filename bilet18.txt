@@ -1,0 +1,63 @@
+// BILETUL 18
+// Se citeste o matrice cu n linii si m coloane.
+// a) Sa se determine elementele minime de pe fiecare linie.
+// b) Sa se numere elementele pare de pe perimetrul matricei.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n, m;
+    int a[100][100];
+    cout << "Introduceti numarul de linii n = ";
+    cin >> n;
+    cout << "Introduceti numarul de coloane m = ";
+    cin >> m;
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= m; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    cout << endl;
+    cout << "Matricea introdusa este:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+    // a) Elementele minime de pe fiecare linie
+    cout << endl;
+    cout << "Elementele minime de pe fiecare linie:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        int minim = a[i][1];
+        for(int j = 2; j <= m; j++)
+            if(a[i][j] < minim)
+                minim = a[i][j];
+        cout << "Linia " << i << ": " << minim << endl;
+    }
+
+    // b) Elementele pare de pe perimetru
+    int nrPare = 0;
+    // Prima si ultima linie
+    for(int j = 1; j <= m; j++)
+    {
+        if(a[1][j] % 2 == 0) nrPare++;
+        if(n > 1 && a[n][j] % 2 == 0) nrPare++;
+    }
+    // Prima si ultima coloana (fara colturi deja numarate)
+    for(int i = 2; i <= n - 1; i++)
+    {
+        if(a[i][1] % 2 == 0) nrPare++;
+        if(m > 1 && a[i][m] % 2 == 0) nrPare++;
+    }
+
+    cout << endl;
+    cout << "Numarul elementelor pare de pe perimetru: " << nrPare;
+    return 0;
+}

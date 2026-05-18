@@ -1,0 +1,33 @@
+// BILETUL 22
+// Se da un sir x de n elemente intregi.
+// Sa se caute ultimul element impar mai mare decat 15.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    int x[100];
+    cout << "Introduceti n = ";
+    cin >> n;
+
+    for(int i = 1; i <= n; i++)
+    {
+        cout << "x[" << i << "] = ";
+        cin >> x[i];
+    }
+
+    int pozUltim = -1;
+    for(int i = 1; i <= n; i++)
+        if(x[i] % 2 != 0 && x[i] > 15)
+            pozUltim = i;
+
+    cout << endl;
+    if(pozUltim == -1)
+        cout << "Nu exista niciun element impar mai mare decat 15.";
+    else
+        cout << "Ultimul element impar mai mare decat 15 este: " << x[pozUltim]
+             << " (pe pozitia " << pozUltim << ")";
+
+    return 0;
+}

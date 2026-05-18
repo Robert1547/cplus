@@ -1,0 +1,54 @@
+// BILETUL 11
+// Se citeste o matrice cu n linii si m coloane.
+// Sa se interschimbe doua coloane c1 si c2 intre ele.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n, m, c1, c2;
+    int a[100][100];
+    cout << "Introduceti numarul de linii n = ";
+    cin >> n;
+    cout << "Introduceti numarul de coloane m = ";
+    cin >> m;
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= m; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    cout << endl;
+    cout << "Matricea initiala:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+    cout << "Introduceti coloana c1 = ";
+    cin >> c1;
+    cout << "Introduceti coloana c2 = ";
+    cin >> c2;
+
+    for(int i = 1; i <= n; i++)
+    {
+        int temp = a[i][c1];
+        a[i][c1] = a[i][c2];
+        a[i][c2] = temp;
+    }
+
+    cout << endl;
+    cout << "Matricea dupa interschimbarea coloanelor " << c1 << " si " << c2 << ":" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,25 @@
+// BILETUL 16
+// Sa se calculeze si sa se afiseze suma:
+// S = 1! + 2! + 3! + ... + n!
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout << "Introduceti n = ";
+    cin >> n;
+
+    long long suma = 0;
+    long long factorial = 1;
+
+    for(int i = 1; i <= n; i++)
+    {
+        factorial *= i;
+        suma += factorial;
+    }
+
+    cout << endl;
+    cout << "S = 1! + 2! + ... + " << n << "! = " << suma;
+    return 0;
+}

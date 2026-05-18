@@ -1,0 +1,72 @@
+// BILETUL 15
+// Se citeste o matrice patratica de ordinul n.
+// Sa se afiseze:
+// - suma elementelor pare de pe diagonala principala
+// - produsul elementelor impare de pe diagonala secundara
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    int a[100][100];
+    cout << "Introduceti ordinul matricei n = ";
+    cin >> n;
+
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+    }
+
+    cout << endl;
+    cout << "Matricea introdusa este:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+        {
+            cout << a[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    int suma = 0;
+    int produs = 1;
+    bool exista = false;
+
+    // Suma elementelor pare de pe diagonala principala
+    for(int i = 1; i <= n; i++)
+    {
+        if(a[i][i] % 2 == 0)
+        {
+            suma += a[i][i];
+        }
+    }
+
+    // Produsul elementelor impare de pe diagonala secundara
+    for(int i = 1; i <= n; i++)
+    {
+        if(a[i][n-i+1] % 2 != 0)
+        {
+            produs *= a[i][n-i+1];
+            exista = true;
+        }
+    }
+
+    cout << endl;
+    cout << "Suma elementelor pare de pe diagonala principala este: ";
+    cout << suma << endl;
+    if(exista)
+    {
+        cout << "Produsul elementelor impare de pe diagonala secundara este: ";
+        cout << produs;
+    }
+    else
+    {
+        cout << "Nu exista elemente impare pe diagonala secundara.";
+    }
+    return 0;
+}

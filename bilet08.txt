@@ -1,0 +1,41 @@
+// BILETUL 8
+// Se citeste un vector cu n elemente.
+// Sa se calculeze produsul elementelor negative, impare,
+// divizibile cu 3, de pe pozitii pare.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    int v[100];
+    cout << "Introduceti n = ";
+    cin >> n;
+
+    for(int i = 1; i <= n; i++)
+    {
+        cout << "v[" << i << "] = ";
+        cin >> v[i];
+    }
+
+    long long produs = 1;
+    bool exista = false;
+
+    for(int i = 1; i <= n; i++)
+    {
+        // pozitie para, negativ, impar, divizibil cu 3
+        if(i % 2 == 0 && v[i] < 0 && v[i] % 2 != 0 && v[i] % 3 == 0)
+        {
+            produs *= v[i];
+            exista = true;
+        }
+    }
+
+    cout << endl;
+    if(exista)
+        cout << "Produsul este: " << produs;
+    else
+        cout << "Nu exista elemente care sa indeplineasca toate conditiile.";
+
+    return 0;
+}

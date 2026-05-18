@@ -1,0 +1,41 @@
+// BILETUL 3
+// Sa se afiseze rezultatul ecuatiei ax^2 + bx + c = 0.
+// a, b si c se citesc de la tastatura.
+// Exemple: a=1, b=-2, c=1 => x1,2=1
+//          a=1, b=1,  c=-2 => x1=1, x2=-2
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+    double a, b, c;
+    cout << "Introduceti a = ";
+    cin >> a;
+    cout << "Introduceti b = ";
+    cin >> b;
+    cout << "Introduceti c = ";
+    cin >> c;
+
+    double delta = b * b - 4 * a * c;
+
+    cout << endl;
+    if(delta > 0)
+    {
+        double x1 = (-b + sqrt(delta)) / (2 * a);
+        double x2 = (-b - sqrt(delta)) / (2 * a);
+        cout << "x1 = " << x1 << endl;
+        cout << "x2 = " << x2 << endl;
+    }
+    else if(delta == 0)
+    {
+        double x = -b / (2 * a);
+        cout << "x1 = x2 = " << x << endl;
+    }
+    else
+    {
+        cout << "Ecuatia nu are solutii reale." << endl;
+    }
+
+    return 0;
+}

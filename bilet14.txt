@@ -1,0 +1,24 @@
+// BILETUL 14
+// Sa se inverseze doua numere introduse de la tastatura.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a, b;
+    cout << "Introduceti primul numar a = ";
+    cin >> a;
+    cout << "Introduceti al doilea numar b = ";
+    cin >> b;
+
+    cout << endl;
+    cout << "Inainte de inversare: a = " << a << ", b = " << b << endl;
+
+    int temp = a;
+    a = b;
+    b = temp;
+
+    cout << "Dupa inversare:       a = " << a << ", b = " << b;
+
+    return 0;
+}

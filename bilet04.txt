@@ -1,0 +1,31 @@
+// BILETUL 4
+// Sa se afiseze cel mai mare divizor propriu al unui numar.
+// Exemple: n=24 => 12 ; n=11 => nu are
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout << "Introduceti numarul n = ";
+    cin >> n;
+
+    // Cel mai mare divizor propriu = n / cel mai mic factor prim
+    int celMaiMareDivPropriu = -1;
+    for(int d = 2; d <= n; d++)
+    {
+        if(n % d == 0)
+        {
+            celMaiMareDivPropriu = n / d;
+            break;
+        }
+    }
+
+    cout << endl;
+    if(celMaiMareDivPropriu == -1 || n == 1)
+        cout << "Numarul " << n << " nu are divizori proprii.";
+    else
+        cout << "Cel mai mare divizor propriu al lui " << n << " este: " << celMaiMareDivPropriu;
+
+    return 0;
+}

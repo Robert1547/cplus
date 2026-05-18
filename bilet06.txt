@@ -1,0 +1,34 @@
+// BILETUL 6 (identic cu Biletul 24)
+// Se considera o matrice cu m linii si n coloane.
+// Sa se determine elementul minim de pe o coloana c data de la tastatura.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int m, n, c;
+    int a[100][100];
+    cout << "Introduceti numarul de linii m = ";
+    cin >> m;
+    cout << "Introduceti numarul de coloane n = ";
+    cin >> n;
+
+    for(int i = 1; i <= m; i++)
+        for(int j = 1; j <= n; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    cout << "Introduceti coloana c = ";
+    cin >> c;
+
+    int minim = a[1][c];
+    for(int i = 2; i <= m; i++)
+        if(a[i][c] < minim)
+            minim = a[i][c];
+
+    cout << endl;
+    cout << "Elementul minim de pe coloana " << c << " este: " << minim;
+    return 0;
+}

@@ -1,0 +1,56 @@
+// BILETUL 20
+// Se citeste o matrice cu n linii si m coloane.
+// a) Sa se formeze un vector cu elementele maxime de pe
+//    fiecare coloana a matricei.
+// b) Sa se ordoneze crescator vectorul format la punctul a.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n, m;
+    int a[100][100];
+    int v[100];
+    cout << "Introduceti numarul de linii n = ";
+    cin >> n;
+    cout << "Introduceti numarul de coloane m = ";
+    cin >> m;
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= m; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    // a) Maximele pe fiecare coloana
+    for(int j = 1; j <= m; j++)
+    {
+        v[j] = a[1][j];
+        for(int i = 2; i <= n; i++)
+            if(a[i][j] > v[j])
+                v[j] = a[i][j];
+    }
+
+    cout << endl;
+    cout << "Vectorul maximelor pe coloane: ";
+    for(int j = 1; j <= m; j++)
+        cout << v[j] << " ";
+
+    // b) Sortare crescatoare (bubble sort)
+    for(int i = 1; i <= m - 1; i++)
+        for(int j = 1; j <= m - i; j++)
+            if(v[j] > v[j + 1])
+            {
+                int temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+
+    cout << endl;
+    cout << "Vectorul sortat crescator: ";
+    for(int j = 1; j <= m; j++)
+        cout << v[j] << " ";
+
+    return 0;
+}

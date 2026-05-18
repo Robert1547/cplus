@@ -1,0 +1,36 @@
+// BILETUL 12
+// Sa se verifice daca doua numere citite sunt gemene
+// (ambele prime si diferenta lor in modul este 2).
+// Exemple: (9, 11); (11, 13)
+
+#include <iostream>
+using namespace std;
+
+bool estePrim(int n)
+{
+    if(n < 2) return false;
+    for(int d = 2; d * d <= n; d++)
+        if(n % d == 0)
+            return false;
+    return true;
+}
+
+int main()
+{
+    int a, b;
+    cout << "Introduceti primul numar a = ";
+    cin >> a;
+    cout << "Introduceti al doilea numar b = ";
+    cin >> b;
+
+    int diferenta = a - b;
+    if(diferenta < 0) diferenta = -diferenta;
+
+    cout << endl;
+    if(estePrim(a) && estePrim(b) && diferenta == 2)
+        cout << "Numerele " << a << " si " << b << " sunt numere gemene.";
+    else
+        cout << "Numerele " << a << " si " << b << " nu sunt numere gemene.";
+
+    return 0;
+}

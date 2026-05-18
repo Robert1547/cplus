@@ -1,0 +1,54 @@
+// BILETUL 9
+// Se citeste o matrice patratica de ordin n.
+// Sa se calculeze suma elementelor de pe diagonala principala
+// si produsul elementelor de SUB diagonala principala.
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    int a[100][100];
+    cout << "Introduceti ordinul matricei n = ";
+    cin >> n;
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++)
+        {
+            cout << "a[" << i << "][" << j << "] = ";
+            cin >> a[i][j];
+        }
+
+    cout << endl;
+    cout << "Matricea introdusa este:" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+
+    // Suma elementelor de pe diagonala principala
+    int suma = 0;
+    for(int i = 1; i <= n; i++)
+        suma += a[i][i];
+
+    // Produsul elementelor de sub diagonala principala (i > j)
+    long long produs = 1;
+    bool existaSub = false;
+    for(int i = 2; i <= n; i++)
+        for(int j = 1; j < i; j++)
+        {
+            produs *= a[i][j];
+            existaSub = true;
+        }
+
+    cout << endl;
+    cout << "Suma elementelor de pe diagonala principala: " << suma << endl;
+    if(existaSub)
+        cout << "Produsul elementelor de sub diagonala principala: " << produs;
+    else
+        cout << "Nu exista elemente sub diagonala principala.";
+
+    return 0;
+}

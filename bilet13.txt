@@ -1,0 +1,79 @@
+// BILETUL 13
+// Se citeste p numar natural (fara cifra 0).
+// Sa se construiasca o matrice patratica cu:
+// - 0 pe diagonala principala
+// - cea mai mare cifra a lui p deasupra diagonalei principale
+// - cea mai mica cifra a lui p sub diagonala principala
+// Se folosesc 3 subprograme (minim, maxim, creeazaAfiseaza).
+// Exemplu: p=6952374, n=5 => min=2, max=9
+
+#include <iostream>
+using namespace std;
+
+int a[100][100];
+int n;
+
+int minim(int p)
+{
+    int minCifra = p % 10;
+    while(p > 0)
+    {
+        int cifra = p % 10;
+        if(cifra < minCifra)
+            minCifra = cifra;
+        p /= 10;
+    }
+    return minCifra;
+}
+
+int maxim(int p)
+{
+    int maxCifra = p % 10;
+    while(p > 0)
+    {
+        int cifra = p % 10;
+        if(cifra > maxCifra)
+            maxCifra = cifra;
+        p /= 10;
+    }
+    return maxCifra;
+}
+
+void creeazaAfiseaza(int p)
+{
+    int minC = minim(p);
+    int maxC = maxim(p);
+
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++)
+        {
+            if(i == j)
+                a[i][j] = 0;
+            else if(j > i)
+                a[i][j] = maxC;
+            else
+                a[i][j] = minC;
+        }
+
+    cout << endl;
+    cout << "Matricea generata (min=" << minC << ", max=" << maxC << "):" << endl;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= n; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+}
+
+int main()
+{
+    int p;
+    cout << "Introduceti numarul p = ";
+    cin >> p;
+    cout << "Introduceti ordinul n al matricei = ";
+    cin >> n;
+
+    creeazaAfiseaza(p);
+
+    return 0;
+}
