@@ -1,0 +1,30 @@
+* BILETUL 11
+* Baza de date: SALARIATI
+* Câmpuri: Nume (C), Prenume (C), Functie (C), Salariu (N), Retineri (N)
+
+USE SALARIATI
+
+* a) Afisarea salariatilor in ordine alfabetica dupa Nume si Prenume
+INDEX ON UPPER(Nume) + UPPER(Prenume) TO idx_np
+SET ORDER TO idx_np
+LIST Nume, Prenume, Functie, Salariu, Retineri
+
+* b) Care este salariul minim?
+CLOSE DATABASES
+USE SALARIATI
+salariu_min = Salariu
+GO TOP
+DO WHILE .NOT. EOF()
+    IF Salariu < salariu_min
+        salariu_min = Salariu
+    ENDIF
+    SKIP
+ENDDO
+? "Salariul minim este:", salariu_min, "lei"
+
+* c) Persoanele care au retineri (Retineri > 0)
+CLOSE DATABASES
+USE SALARIATI
+LIST FOR Retineri > 0
+
+CLOSE DATABASES

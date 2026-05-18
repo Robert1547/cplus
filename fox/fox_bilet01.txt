@@ -1,0 +1,23 @@
+* BILETUL 1
+* Baza de date: BELETRISTICĂ
+* Câmpuri: Nume_carte (C), ISBN (C), Editura (C), Autor (C), An_aparitie (N)
+
+USE BELETRISTICA
+
+* a) Afisarea cartilor in ordine crescatoare a anului aparitiei
+INDEX ON An_aparitie TO idx_an
+SET ORDER TO idx_an
+LIST Nume_carte, Autor, An_aparitie
+
+* b) Afisarea cartilor unui autor dat de la tastatura
+CLOSE DATABASES
+USE BELETRISTICA
+INPUT "Introduceti numele autorului: " TO autor_cautat
+LIST FOR UPPER(Autor) = UPPER(autor_cautat)
+
+* c) Afisarea cartilor al caror nume contine litera "a"
+CLOSE DATABASES
+USE BELETRISTICA
+LIST FOR "a" $ LOWER(Nume_carte)
+
+CLOSE DATABASES

@@ -1,0 +1,31 @@
+* BILETUL 20
+* Baza de date: AGENDA
+* Câmpuri: Nume (C), Prenume (C), Adresa (C), Telefon (C)
+
+USE AGENDA
+
+* a) Numarul de persoane cu acelasi Nume ca cel dat de la tastatura
+INPUT "Introduceti numele cautat: " TO nm_cautat
+COUNT FOR UPPER(TRIM(Nume)) = UPPER(TRIM(nm_cautat)) TO nr_persoane
+? "Numarul de persoane cu numele", TRIM(nm_cautat), "este:", nr_persoane
+
+* b) Numarul de telefon al unei persoane cu Nume si Prenume date
+CLOSE DATABASES
+USE AGENDA
+INPUT "Introduceti numele: " TO nm
+INPUT "Introduceti prenumele: " TO pn
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(nm)) .AND. UPPER(TRIM(Prenume)) = UPPER(TRIM(pn))
+IF FOUND()
+    ? "Numarul de telefon al lui", TRIM(Nume), TRIM(Prenume), "este:", TRIM(Telefon)
+ELSE
+    ? "Persoana nu a fost gasita."
+ENDIF
+
+* c) Agenda ordonata dupa Nume si Prenume
+CLOSE DATABASES
+USE AGENDA
+INDEX ON UPPER(Nume) + UPPER(Prenume) TO idx_np
+SET ORDER TO idx_np
+LIST Nume, Prenume, Adresa, Telefon
+
+CLOSE DATABASES

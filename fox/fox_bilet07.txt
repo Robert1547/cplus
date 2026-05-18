@@ -1,0 +1,31 @@
+* BILETUL 7
+* Baza de date: ELEVI
+* Câmpuri: Nume (C), Prenume (C), Clasa (C), Nrabs (N), Motivate (N), M_purtare (N)
+
+USE ELEVI
+
+* a) Ordonare crescatoare dupa Nume si Prenume
+INDEX ON UPPER(Nume) + UPPER(Prenume) TO idx_np
+SET ORDER TO idx_np
+LIST Nume, Prenume, Clasa, Nrabs, Motivate, M_purtare
+
+* b) Afisarea numarului de absente ale unui elev dat
+CLOSE DATABASES
+USE ELEVI
+INPUT "Introduceti numele elevului: " TO elev_cautat
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(elev_cautat))
+IF FOUND()
+    ? "Elevul:", TRIM(Nume), TRIM(Prenume)
+    ? "Numar total absente:", Nrabs
+    ? "Absente motivate:", Motivate
+    ? "Absente nemotivate:", Nrabs - Motivate
+ELSE
+    ? "Elevul nu a fost gasit."
+ENDIF
+
+* c) Afisarea elevilor cu media scazuta la purtare (sub 8)
+CLOSE DATABASES
+USE ELEVI
+LIST FOR M_purtare < 8
+
+CLOSE DATABASES

@@ -1,0 +1,26 @@
+* BILETUL 6
+* Baza de date: LIBRARIE
+* Câmpuri: Codul_cartii (N), Numele_cartii (C), Autorul (C),
+*           Anul_aparitiei (N), Editura (C), Pret (N), Nr_carti (N)
+
+USE LIBRARIE
+
+* a) Stergerea cartilor cu valoare mai mica de 1 leu
+DELETE FOR Pret < 1
+PACK
+? "Cartile cu pret mai mic de 1 leu au fost sterse."
+LIST
+
+* b) Afisarea cartilor in ordine alfabetica a autorilor
+CLOSE DATABASES
+USE LIBRARIE
+INDEX ON UPPER(Autorul) TO idx_autor
+SET ORDER TO idx_autor
+LIST Numele_cartii, Autorul, Pret
+
+* c) Afisarea cartilor cu titlul "Poezii"
+CLOSE DATABASES
+USE LIBRARIE
+LIST FOR UPPER(TRIM(Numele_cartii)) = "POEZII"
+
+CLOSE DATABASES

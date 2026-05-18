@@ -1,0 +1,31 @@
+* BILETUL 19
+* Baza de date: BAC
+* Câmpuri: Nume (C), Clasa (C), Media (N)
+
+USE BAC
+
+* a) Numarul de elevi respinsi (media < 5)
+COUNT FOR Media < 5 TO nr_respinsi
+? "Numarul de elevi respinsi:", nr_respinsi
+
+* b) Elevii din clasa XIIA cu media mai mare decat 8.50
+CLOSE DATABASES
+USE BAC
+LIST FOR UPPER(TRIM(Clasa)) = "XIIA" .AND. Media > 8.50
+
+* c) Remedierea greselii pentru elevul X (modificarea mediei)
+CLOSE DATABASES
+USE BAC
+INPUT "Introduceti numele elevului: " TO elev_nm
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(elev_nm))
+IF FOUND()
+    DISPLAY
+    INPUT "Introduceti media corecta: " TO media_noua
+    REPLACE Media WITH media_noua
+    ? "Media a fost actualizata cu succes."
+    DISPLAY
+ELSE
+    ? "Elevul nu a fost gasit."
+ENDIF
+
+CLOSE DATABASES

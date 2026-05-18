@@ -1,0 +1,22 @@
+* BILETUL 2
+* Baza de date: LIBRARIE
+* Câmpuri: Codul_cartii (N), Numele_cartii (C), Autorul (C),
+*           Anul_aparitiei (N), Editura (C), Pret (N), Nr_carti (N)
+
+USE LIBRARIE
+
+* a) Cartile scrise de Mihai Eminescu
+LIST FOR UPPER(Autorul) = "MIHAI EMINESCU"
+
+* b) Cartile aparute dupa 2005
+CLOSE DATABASES
+USE LIBRARIE
+LIST FOR Anul_aparitiei > 2005
+
+* c) Cate carti de la editura ALL se gasesc in librarie
+CLOSE DATABASES
+USE LIBRARIE
+COUNT FOR UPPER(Editura) = "ALL" TO nr_carti_all
+? "Numarul de carti de la editura ALL este:", nr_carti_all
+
+CLOSE DATABASES

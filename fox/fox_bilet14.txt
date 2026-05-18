@@ -1,0 +1,20 @@
+* BILETUL 14
+* Baza de date: MAGAZIN_INSTRUMENTE
+* Câmpuri: Instrument (C), Client (C), Pret (N), Data (D)
+
+USE MAGAZIN_INSTRUMENTE
+
+* a) Instrumentele care contin caracterul 'n'
+LIST FOR "n" $ LOWER(Instrument)
+
+* b) Clientii care au achizitionat o vioara
+CLOSE DATABASES
+USE MAGAZIN_INSTRUMENTE
+LIST Client, Instrument, Pret, Data FOR UPPER(TRIM(Instrument)) = "VIOARA"
+
+* c) Preturile cuprinse intre 1000 si 1500 lei
+CLOSE DATABASES
+USE MAGAZIN_INSTRUMENTE
+LIST Instrument, Client, Pret, Data FOR Pret >= 1000 .AND. Pret <= 1500
+
+CLOSE DATABASES

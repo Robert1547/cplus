@@ -1,0 +1,22 @@
+* BILETUL 15
+* Baza de date: ELEVI
+* Câmpuri: Nume (C), Prenume (C), Clasa (C), Media (N)
+
+USE ELEVI
+
+* a) Elevii cu media finala 8
+LIST FOR Media = 8
+
+* b) Elevii promovati din clasa a X-a C (media >= 5)
+CLOSE DATABASES
+USE ELEVI
+LIST FOR UPPER(TRIM(Clasa)) = "A X-A C" .AND. Media >= 5
+
+* c) Afisarea in ordine descrescatoare a elevilor din clasa a IX-a B
+CLOSE DATABASES
+USE ELEVI
+INDEX ON -Media TO idx_media_desc
+SET ORDER TO idx_media_desc
+LIST FOR UPPER(TRIM(Clasa)) = "A IX-A B"
+
+CLOSE DATABASES

@@ -1,0 +1,44 @@
+* BILETUL 10
+* Baza de date: SALARIATI
+* Câmpuri: Nume (C), Prenume (C), Functie (C), Salariu (N), Retineri (N)
+
+USE SALARIATI
+
+* a) Ce retineri are salariatul Ion Ilie?
+LOCATE FOR UPPER(TRIM(Nume)) = "ILIE" .AND. UPPER(TRIM(Prenume)) = "ION"
+IF FOUND()
+    ? "Salariatul Ion Ilie are retineri de:", Retineri, "lei"
+ELSE
+    ? "Salariatul Ion Ilie nu a fost gasit."
+ENDIF
+
+* b) Salariati grupati pe functii cu salariul mediu al fiecarei functii
+CLOSE DATABASES
+USE SALARIATI
+INDEX ON UPPER(Functie) TO idx_functie
+SET ORDER TO idx_functie
+functie_curenta = ""
+GO TOP
+DO WHILE .NOT. EOF()
+    IF UPPER(TRIM(Functie)) <> UPPER(TRIM(functie_curenta))
+        functie_curenta = TRIM(Functie)
+        AVERAGE Salariu FOR UPPER(TRIM(Functie)) = UPPER(TRIM(functie_curenta)) TO sal_mediu
+        ? "Functia:", TRIM(functie_curenta), "- Salariu mediu:", sal_mediu
+    ENDIF
+    SKIP
+ENDDO
+
+* c) Cautarea unui angajat dupa Nume si Prenume date de la tastatura
+CLOSE DATABASES
+USE SALARIATI
+INPUT "Introduceti numele: " TO nm
+INPUT "Introduceti prenumele: " TO pn
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(nm)) .AND. UPPER(TRIM(Prenume)) = UPPER(TRIM(pn))
+IF FOUND()
+    ? "Angajat gasit:"
+    DISPLAY
+ELSE
+    ? "Angajatul nu a fost gasit."
+ENDIF
+
+CLOSE DATABASES

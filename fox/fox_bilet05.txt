@@ -1,0 +1,20 @@
+* BILETUL 5
+* Baza de date: SERVICIU
+* Câmpuri: Nume (C), Prenume (C), Domiciliu (C), Meserie (C), Salariu (N)
+
+USE SERVICIU
+
+* a) Persoanele al caror Nume contine litera "i" pe pozitia a doua
+LIST FOR SUBSTR(LOWER(Nume), 2, 1) = "i"
+
+* b) Persoanele al caror salariu contine cifra 7
+CLOSE DATABASES
+USE SERVICIU
+LIST FOR "7" $ STR(Salariu)
+
+* c) Persoanele cu domiciliul in Bucuresti sau Constanta
+CLOSE DATABASES
+USE SERVICIU
+LIST FOR UPPER(TRIM(Domiciliu)) = "BUCURESTI" .OR. UPPER(TRIM(Domiciliu)) = "CONSTANTA"
+
+CLOSE DATABASES

@@ -1,0 +1,23 @@
+* BILETUL 3
+* Baza de date: MEDICINA
+* Câmpuri: Nume (C), Prenume (C), Medie_BAC (N), Medie_Admitere (N),
+*           Respinsi (L), Admisi (L)
+
+USE MEDICINA
+
+* a) Afisarea tuturor studentilor admisi
+LIST FOR Admisi = .T.
+
+* b) Afisarea studentilor in ordine descrescatoare a mediei de BAC
+CLOSE DATABASES
+USE MEDICINA
+INDEX ON -Medie_BAC TO idx_bac
+SET ORDER TO idx_bac
+LIST Nume, Prenume, Medie_BAC
+
+* c) Afisarea studentilor cu media de BAC sub 9
+CLOSE DATABASES
+USE MEDICINA
+LIST FOR Medie_BAC < 9
+
+CLOSE DATABASES

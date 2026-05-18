@@ -1,0 +1,23 @@
+* BILETUL 13
+* Baza de date: VACANTA
+* Câmpuri: Destinatie (C), Data_plecarii (D), Nume_clienti (C),
+*           Varsta_clienti (N), Telefon_clienti (C), Pret (N), Perioada (N)
+
+USE VACANTA
+
+* a) Clientii si destinatiile cu perioada de 4 zile
+LIST Nume_clienti, Destinatie, Perioada, Data_plecarii FOR Perioada = 4
+
+* b) Destinatiile dorite de clientii cu varsta de peste 23 de ani
+CLOSE DATABASES
+USE VACANTA
+LIST Destinatie, Nume_clienti, Varsta_clienti FOR Varsta_clienti > 23
+
+* c) Destinatiile ordonate dupa Data_plecarii
+CLOSE DATABASES
+USE VACANTA
+INDEX ON Data_plecarii TO idx_data
+SET ORDER TO idx_data
+LIST Destinatie, Data_plecarii, Nume_clienti, Pret
+
+CLOSE DATABASES

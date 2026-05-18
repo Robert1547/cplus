@@ -1,0 +1,37 @@
+* BILETUL 21
+* Baza de date: SALARIATI
+* Câmpuri: Nume (C), Functie (C), Salariu (N), Retineri (N)
+
+USE SALARIATI
+
+* a) Numele si functia persoanei cu salariul maxim
+salariu_max = 0
+GO TOP
+DO WHILE .NOT. EOF()
+    IF Salariu > salariu_max
+        salariu_max = Salariu
+    ENDIF
+    SKIP
+ENDDO
+LOCATE FOR Salariu = salariu_max
+? "Persoana cu salariul maxim:"
+? "Nume:", TRIM(Nume)
+? "Functie:", TRIM(Functie)
+? "Salariu:", Salariu
+
+* b) Retinerile persoanei X si cat mai are de primit
+CLOSE DATABASES
+USE SALARIATI
+INPUT "Introduceti numele persoanei: " TO pers_nm
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(pers_nm))
+IF FOUND()
+    de_primit = Salariu - Retineri
+    ? "Persoana:", TRIM(Nume)
+    ? "Salariu:", Salariu
+    ? "Retineri:", Retineri
+    ? "Rest de primit:", de_primit
+ELSE
+    ? "Persoana nu a fost gasita."
+ENDIF
+
+CLOSE DATABASES

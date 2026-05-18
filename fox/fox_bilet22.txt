@@ -1,0 +1,31 @@
+* BILETUL 22
+* Baza de date: PERSOANE
+* Câmpuri: Nume (C), Adresa (C), Data_nasterii (D), Meserie (C), Gradatie (N), Salariu (N)
+
+USE PERSOANE
+
+* a) Persoanele cu meseria X data de la tastatura
+INPUT "Introduceti meseria cautata: " TO mes_cautata
+LIST FOR UPPER(TRIM(Meserie)) = UPPER(TRIM(mes_cautata))
+
+* b) Persoanele cu aceeasi meserie ca o persoana Y data de la tastatura
+CLOSE DATABASES
+USE PERSOANE
+INPUT "Introduceti numele persoanei de referinta: " TO pers_ref
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(pers_ref))
+IF FOUND()
+    meserie_ref = TRIM(Meserie)
+    ? "Persoanele cu meseria '", TRIM(meserie_ref), "' (la fel ca", TRIM(pers_ref), "):"
+    LIST FOR UPPER(TRIM(Meserie)) = UPPER(TRIM(meserie_ref))
+ELSE
+    ? "Persoana de referinta nu a fost gasita."
+ENDIF
+
+* c) Salariul mediu al persoanelor cu o meserie specificata
+CLOSE DATABASES
+USE PERSOANE
+INPUT "Introduceti meseria: " TO mes_cautata
+AVERAGE Salariu FOR UPPER(TRIM(Meserie)) = UPPER(TRIM(mes_cautata)) TO sal_mediu
+? "Salariul mediu pentru meseria '", TRIM(mes_cautata), "' este:", sal_mediu, "lei"
+
+CLOSE DATABASES

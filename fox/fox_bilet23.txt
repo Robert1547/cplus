@@ -1,0 +1,41 @@
+* BILETUL 23
+* Baza de date: ELEVI
+* Câmpuri: Nume (C), Prenume (C), Clasa (C), Media (N)
+
+USE ELEVI
+
+* a) Elevii ordonati alfabetic, pe clase
+INDEX ON UPPER(Clasa) + UPPER(Nume) + UPPER(Prenume) TO idx_cls_np
+SET ORDER TO idx_cls_np
+LIST Clasa, Nume, Prenume, Media
+
+* b) Primii 3 si ultimii 3 elevi in ordinea mediilor din scoala
+CLOSE DATABASES
+USE ELEVI
+INDEX ON -Media TO idx_media_desc
+SET ORDER TO idx_media_desc
+? "Primii 3 elevi dupa medie:"
+GO TOP
+nr = 0
+DO WHILE .NOT. EOF() .AND. nr < 3
+    DISPLAY Nume, Prenume, Clasa, Media
+    nr = nr + 1
+    SKIP
+ENDDO
+? "Ultimii 3 elevi dupa medie:"
+GO BOTTOM
+nr = 0
+DO WHILE .NOT. BOF() .AND. nr < 3
+    DISPLAY Nume, Prenume, Clasa, Media
+    nr = nr + 1
+    SKIP -1
+ENDDO
+
+* c) Elevii grupati pe clase, in fiecare clasa descrescator dupa medie
+CLOSE DATABASES
+USE ELEVI
+INDEX ON UPPER(Clasa) + STR(100 - Media, 6, 2) TO idx_cls_med_desc
+SET ORDER TO idx_cls_med_desc
+LIST Clasa, Nume, Prenume, Media
+
+CLOSE DATABASES

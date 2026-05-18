@@ -1,0 +1,43 @@
+* BILETUL 24
+* Baza de date: ABONATI
+* Câmpuri: Nume (C), Prenume (C), Numar_telefon (C), Adresa (C), Pret_factura (N)
+
+* a) Crearea bazei de date si afisarea tuturor abonatilor
+CREATE ABONATI
+* Se adauga campurile:
+*   Nume          C 30
+*   Prenume       C 30
+*   Numar_telefon C 15
+*   Adresa        C 50
+*   Pret_factura  N 10 2
+
+USE ABONATI
+* Adaugam cateva inregistrari de exemplu:
+APPEND BLANK
+REPLACE Nume WITH "Ionescu", Prenume WITH "Maria", Numar_telefon WITH "0700111222", Adresa WITH "Bucuresti", Pret_factura WITH 45.50
+APPEND BLANK
+REPLACE Nume WITH "Popescu", Prenume WITH "Ion", Numar_telefon WITH "0720333444", Adresa WITH "Cluj", Pret_factura WITH 62.00
+? "Toti abonati:"
+LIST
+
+* b) Cautarea unui numar de telefon si afisarea informatiilor abonatului
+CLOSE DATABASES
+USE ABONATI
+INPUT "Introduceti numarul de telefon cautat: " TO tel_cautat
+LOCATE FOR TRIM(Numar_telefon) = TRIM(tel_cautat)
+IF FOUND()
+    ? "Abonatul a fost gasit:"
+    DISPLAY
+ELSE
+    ? "Numarul de telefon nu a fost gasit."
+ENDIF
+
+* c) Sortarea abonatilor in ordine alfabetica dupa Nume si Prenume
+CLOSE DATABASES
+USE ABONATI
+INDEX ON UPPER(Nume) + UPPER(Prenume) TO idx_np
+SET ORDER TO idx_np
+? "Abonati sortati alfabetic:"
+LIST Nume, Prenume, Numar_telefon, Adresa, Pret_factura
+
+CLOSE DATABASES

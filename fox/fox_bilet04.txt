@@ -1,0 +1,39 @@
+* BILETUL 4
+* Baza de date: LIBRARIE
+* Câmpuri: Codul_cartii (N), Numele_cartii (C), Autorul (C),
+*           Anul_aparitiei (N), Editura (C), Pret (N), Nr_carti (N)
+
+USE LIBRARIE
+
+* a) Pentru fiecare editura, numarul de carti din librarie
+INDEX ON UPPER(Editura) TO idx_editura
+SET ORDER TO idx_editura
+editura_curenta = ""
+GO TOP
+DO WHILE .NOT. EOF()
+    IF UPPER(TRIM(Editura)) <> UPPER(TRIM(editura_curenta))
+        editura_curenta = TRIM(Editura)
+        COUNT FOR UPPER(TRIM(Editura)) = UPPER(TRIM(editura_curenta)) TO nr
+        ? "Editura:", TRIM(editura_curenta), "- Numar carti:", nr
+    ENDIF
+    SKIP
+ENDDO
+
+* b) Exista in librarie cartea "Amintiri din copilarie"?
+CLOSE DATABASES
+USE LIBRARIE
+LOCATE FOR UPPER(TRIM(Numele_cartii)) = UPPER("Amintiri din copilarie")
+IF FOUND()
+    ? "Cartea 'Amintiri din copilarie' EXISTA in librarie."
+ELSE
+    ? "Cartea 'Amintiri din copilarie' NU exista in librarie."
+ENDIF
+
+* c) Cartile in ordine descrescatoare a anilor de aparitie
+CLOSE DATABASES
+USE LIBRARIE
+INDEX ON -Anul_aparitiei TO idx_an_desc
+SET ORDER TO idx_an_desc
+LIST Numele_cartii, Autorul, Anul_aparitiei, Pret
+
+CLOSE DATABASES

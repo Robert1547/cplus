@@ -1,0 +1,28 @@
+* BILETUL 8
+* Baza de date: FIRMA
+* Câmpuri: Nume (C), Prenume (C), Profesie (C), Nume_departament (C), Salariu (N)
+
+USE FIRMA
+
+* a) Angajatii cu salariu > 400 din departamentul IT sau PERSONAL
+LIST FOR Salariu > 400 .AND. ;
+     (UPPER(TRIM(Nume_departament)) = "IT" .OR. UPPER(TRIM(Nume_departament)) = "PERSONAL")
+
+* b) Ce profesie are angajatul cu cel mai mare salariu?
+CLOSE DATABASES
+USE FIRMA
+salariu_max = 0
+GO TOP
+DO WHILE .NOT. EOF()
+    IF Salariu > salariu_max
+        salariu_max = Salariu
+    ENDIF
+    SKIP
+ENDDO
+LOCATE FOR Salariu = salariu_max
+? "Angajatul cu salariul maxim:"
+? "Nume:", TRIM(Nume), TRIM(Prenume)
+? "Profesie:", TRIM(Profesie)
+? "Salariu:", Salariu
+
+CLOSE DATABASES

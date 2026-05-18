@@ -1,0 +1,23 @@
+* BILETUL 12
+* Baza de date: SALARIATI
+* Câmpuri: Nume (C), Prenume (C), Functie (C), Salariu (N), Retineri (N)
+
+USE SALARIATI
+
+* a) Salariul mediu
+AVERAGE Salariu TO sal_mediu
+? "Salariul mediu al firmei este:", sal_mediu, "lei"
+
+* b) Cati muncitori necalificati are firma?
+CLOSE DATABASES
+USE SALARIATI
+COUNT FOR UPPER(TRIM(Functie)) = "MUNCITOR NECALIFICAT" TO nr_mnc
+? "Numarul de muncitori necalificati:", nr_mnc
+
+* c) Cate persoane au retineri?
+CLOSE DATABASES
+USE SALARIATI
+COUNT FOR Retineri > 0 TO nr_retineri
+? "Numarul de persoane cu retineri:", nr_retineri
+
+CLOSE DATABASES

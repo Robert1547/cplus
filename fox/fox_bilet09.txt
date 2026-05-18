@@ -1,0 +1,27 @@
+* BILETUL 9
+* Baza de date: DESTINATII
+* Câmpuri: Denumire (C), Descriere (C), Nume_client (C), Prenume_client (C),
+*           Adresa_client (C), Telefon_client (C)
+
+USE DESTINATII
+
+* a) Stergerea destinatiei cu denumirea "Miami"
+DELETE FOR UPPER(TRIM(Denumire)) = "MIAMI"
+PACK
+? "Destinatia Miami a fost stearsa."
+LIST
+
+* b) Introducerea unei noi destinatii si vizualizarea intregului continut
+CLOSE DATABASES
+USE DESTINATII
+APPEND BLANK
+REPLACE Denumire     WITH "Palma de Malorca"
+REPLACE Descriere    WITH "hotel 5*"
+REPLACE Nume_client  WITH "Popescu"
+REPLACE Prenume_client WITH "Andrei"
+REPLACE Adresa_client WITH "Brasov"
+REPLACE Telefon_client WITH "0763000000"
+? "Inregistrare adaugata cu succes. Continut curent:"
+LIST
+
+CLOSE DATABASES

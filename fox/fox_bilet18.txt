@@ -1,0 +1,33 @@
+* BILETUL 18
+* Baza de date: PRODUSE
+* Câmpuri: Codp (C), Denp (C), Codm (C), Denm (C), Cant (N), Pret (N)
+* Denp = denumire produs, Denm = denumire material
+
+USE PRODUSE
+
+* a) Toate materialele cu pretul unitar maxim
+pret_max = 0
+GO TOP
+DO WHILE .NOT. EOF()
+    IF Pret > pret_max
+        pret_max = Pret
+    ENDIF
+    SKIP
+ENDDO
+? "Materialele cu pretul maxim (", pret_max, "):"
+LIST FOR Pret = pret_max
+
+* b) Materialele folosite la realizarea unui produs cu nume dat de la tastatura
+CLOSE DATABASES
+USE PRODUSE
+INPUT "Introduceti numele produsului: " TO prod_cautat
+LIST Codm, Denm, Cant, Pret FOR UPPER(TRIM(Denp)) = UPPER(TRIM(prod_cautat))
+
+* c) Valoarea totala a materialelor folosite la realizarea unui produs
+CLOSE DATABASES
+USE PRODUSE
+INPUT "Introduceti numele produsului: " TO prod_cautat
+SUM Cant * Pret FOR UPPER(TRIM(Denp)) = UPPER(TRIM(prod_cautat)) TO valoare_totala
+? "Valoarea totala a materialelor pentru produsul", TRIM(prod_cautat), "este:", valoare_totala, "lei"
+
+CLOSE DATABASES

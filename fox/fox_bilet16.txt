@@ -1,0 +1,41 @@
+* BILETUL 16
+* Baza de date: ELEVI
+* Câmpuri: Nume (C), Clasa (C), Abs_mot (N), Abs_nmot (N), Med_s1 (N), Med_s2 (N)
+
+USE ELEVI
+
+* a) Primii 3 elevi din clasa XIA cu cele mai multe absente nemotivate
+INDEX ON -Abs_nmot TO idx_nmot_desc
+SET ORDER TO idx_nmot_desc
+nr = 0
+GO TOP
+DO WHILE .NOT. EOF() .AND. nr < 3
+    IF UPPER(TRIM(Clasa)) = "XIA"
+        DISPLAY Nume, Clasa, Abs_nmot
+        nr = nr + 1
+    ENDIF
+    SKIP
+ENDDO
+
+* b) Media generala a unui elev cu Nume si Clasa date de la tastatura
+CLOSE DATABASES
+USE ELEVI
+INPUT "Introduceti numele elevului: " TO elev_nm
+INPUT "Introduceti clasa: " TO elev_cl
+LOCATE FOR UPPER(TRIM(Nume)) = UPPER(TRIM(elev_nm)) .AND. UPPER(TRIM(Clasa)) = UPPER(TRIM(elev_cl))
+IF FOUND()
+    med_gen = (Med_s1 + Med_s2) / 2
+    ? "Elev:", TRIM(Nume), "- Clasa:", TRIM(Clasa)
+    ? "Media semestrul I:", Med_s1
+    ? "Media semestrul II:", Med_s2
+    ? "Media generala:", med_gen
+ELSE
+    ? "Elevul nu a fost gasit."
+ENDIF
+
+* c) Elevii cu absente nemotivate mai mari de 40
+CLOSE DATABASES
+USE ELEVI
+LIST FOR Abs_nmot > 40
+
+CLOSE DATABASES

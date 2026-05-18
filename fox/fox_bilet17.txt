@@ -1,0 +1,23 @@
+* BILETUL 17
+* Baza de date: ANGAJAT
+* Câmpuri: Nume (C), Salariu (N), Avans (N), Lichidare (N), Vechime (N)
+
+USE ANGAJAT
+
+* a) Completarea campurilor Avans si Lichidare
+*    Avans = 45% din Salariu
+*    Lichidare = Salariu - Avans = 55% din Salariu
+REPLACE ALL Avans WITH Salariu * 0.45
+REPLACE ALL Lichidare WITH Salariu - Avans
+? "Campurile Avans si Lichidare au fost completate."
+LIST Nume, Salariu, Avans, Lichidare
+
+* b) Indexare salarii: +5% pentru vechime > 10 ani, +4% pentru ceilalti
+CLOSE DATABASES
+USE ANGAJAT
+REPLACE ALL Salariu WITH Salariu * 1.05 FOR Vechime > 10
+REPLACE ALL Salariu WITH Salariu * 1.04 FOR Vechime <= 10
+? "Salariile au fost indexate."
+LIST Nume, Salariu, Vechime
+
+CLOSE DATABASES
